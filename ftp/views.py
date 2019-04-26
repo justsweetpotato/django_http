@@ -12,19 +12,21 @@ def index(request):
         local_ip = get_host_ip()  # 获取本机 IP
         local_port = (sys.argv[-1]).split(":")[-1]  # 获取运行的端口号
 
+        content = show_dir_file()
+        is_friday = today_is_friday()  # 今天是周五吗?
+        content["is_friday"] = is_friday
+
         if local_port == "runserver":  # 判断是否是默认运行方式并给出提示
-            local_port = "8000 请注意, 您目前使用默认方式运行, 其他设备可能无法访问, 请使用 python manage.py runserver 0.0.0.0:8000"
+            local_port = "8000"
+            error = "请注意, 您目前使用默认方式运行, 其他设备可能无法访问, 请使用 python manage.py runserver 0.0.0.0:8000"
+            content["error"] = error
 
         if local_ip:
-            host = "{}:{}".format(local_ip, local_port)
+            host = "http://{}:{}".format(local_ip, local_port)
         else:
             host = None
 
-        is_friday = today_is_friday()  # 今天是周五吗?
-
-        content = show_dir_file()
         content["host"] = host
-        content["is_friday"] = is_friday
         return render(request, "index.html", content)
 
     else:
