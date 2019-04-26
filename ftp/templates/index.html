@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ftp server</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <style>
+        a:link {
+            text-decoration: none;
+            color: blue
+        }
+    </style>
+</head>
+<body>
+<h4>Django 文件传输工具 V2.0</h4>
+<small>
+    在其他设备上访问:
+    {% if host %}
+        {{ host }}
+    {% else %}
+        无法获得当前设备的内网 IP 地址.
+    {% endif %}
+</small>
+<hr>
+<b>下载</b>
+<br>
+<small>/django_ftp/static/share/</small>
+<br>
+<br>
+{% for foo in content %}
+    <li style="list-style-type: none">
+        <a href="/static/share/{{ foo }}" download="">{{ foo }}</a>
+    </li>
+{% endfor %}
+<hr>
+<b>上传</b>
+<br>
+<br>
+<form action="" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+    <input type="file" name="file" id="">
+    <br>
+    <br>
+    <input type="submit" value="上传">
+</form>
+<hr>
+<div>
+    今天是周五吗?
+    {% if is_friday %}
+        <span>是!</span>
+    {% else %}
+        <span>不是!</span>
+    {% endif %}
+</div>
+</body>
+</html>
