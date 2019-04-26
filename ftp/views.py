@@ -10,19 +10,23 @@ from .ftp import show_dir_file, upload_to_dir, get_host_ip, today_is_friday
 def index(request):
     if request.method != "POST":
         local_ip = get_host_ip()  # 获取本机 IP
-        local_port = (sys.argv[-1]).split(":")[-1]  # 获取运行的端口号
+        input_port = (sys.argv[-1]).split(":")[-1]  # 获取输入的端口号
+        input_ip = (sys.argv[-1]).split(":")[0]  # 获取输入的 ip 地址
 
-        content = show_dir_file()
+        content = show_dir_file()  # 遍历文件夹下的所有文件名
         is_friday = today_is_friday()  # 今天是周五吗?
         content["is_friday"] = is_friday
 
-        if local_port == "runserver":  # 判断是否是默认运行方式并给出提示
-            local_port = "8000"
+        if input_ip == "127.0.0.1":  # 判断是否值允许来自本地 ip 的访问
+            error = "请注意, 您当前程序运行在本地, 其他设备可能无法访问, 请使用 python manage.py runserver 0.0.0.0:8000 (不应使用 127.0.0.1)."
+            content["error"] = error
+        if input_ip == input_port:  # 两者的值都为 runserver 表示以默认方式运行
+            input_port = "8000"
             error = "请注意, 您目前使用默认方式运行, 其他设备可能无法访问, 请使用 python manage.py runserver 0.0.0.0:8000"
             content["error"] = error
 
         if local_ip:
-            host = "http://{}:{}".format(local_ip, local_port)
+            host = "http://{}:{}".format(local_ip, input_port)
         else:
             host = None
 
