@@ -1,10 +1,10 @@
 # Django 文件传输工具
 
-使用 Django 框架完成的简单, 小巧的文件传输工具,  支持下载与上传文件到指定文件夹, 让您在局域网, 主机和虚拟机之间方便的传输文件.
+使用 Django 框架完成的简单、小巧的文件传输工具,  支持下载与上传文件到指定文件夹, 让您在局域网中、 主机和虚拟机之间方便的传输文件.
 <br>
 ![界面](https://raw.githubusercontent.com/justsweetpotato/makedown-img-store/master/ftp/django_ftp.png)
 
-### 一丶安装依赖
+### 一、安装依赖
 #### 1.1 Python 安装
 <a href="https://www.python.org/downloads/">Python</a>
 
@@ -19,21 +19,21 @@ $ pip install Django
 $ pip install --upgrade django
 ```
 
-### 二丶运行
-<del>python manage.py migrate  # 仅执行一次</del>
+### 二、运行
+<del>$ python manage.py migrate  # 仅执行一次</del>
 ```
 $ cd django_ftp
 $ python manage.py runserver 0.0.0.0:8000
 ```
-0.0.0.0:8000
+"0.0.0.0:8000"
 <br>
-0.0.0.0 表示运行在本地并开放来自任何地址的访问.
+"0.0.0.0" 表示运行在本地并开放来自任何地址的访问.
 <br>
-8000 表示运行的端口, 可自定.
+"8000" 表示运行的端口, 可自定.
 
-### 三丶连接
+### 三、连接
 在本机运行之后, 在本机浏览器上访问 http://127.0.0.1:8000<br>
-页面会自动提示同一局域网下其他设备应该访问的地址.<br>
+页面会自动提示局域网下其他设备应该访问的地址.<br>
 共享的文件保存在 /django_ftp/static/share 目录下.
 
 ### 一些问题:

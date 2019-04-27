@@ -37,7 +37,8 @@ def upload_to_dir(file_name, file):
     with open('./static/share/{0}'.format(file_name), 'wb') as f:
         for chunk in file.chunks():
             f.write(chunk)
-    return "OK"
+
+    return True
 
 
 # 今天是周五吗

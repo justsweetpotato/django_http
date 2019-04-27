@@ -17,7 +17,7 @@ def index(request):
         is_friday = today_is_friday()  # 今天是周五吗?
         content["is_friday"] = is_friday
 
-        if input_ip == "127.0.0.1":  # 判断是否值允许来自本地 ip 的访问
+        if input_ip == "127.0.0.1":  # 判断是否只允许来自本地 ip 的访问
             error = "请注意, 您当前程序运行在本地, 其他设备可能无法访问, 请使用 python manage.py runserver 0.0.0.0:8000 (不应使用 127.0.0.1)."
             content["error"] = error
         if input_ip == input_port:  # 两者的值都为 runserver 表示以默认方式运行
@@ -44,5 +44,5 @@ def index(request):
             content = {"content": e}
             return render(request, "fail.html", content)
 
-        if response == "OK":
+        if response:
             return render(request, "success.html")
