@@ -6,8 +6,8 @@ import socket
 from datetime import datetime
 
 
-# 优雅的获得 ip 地址
 def get_host_ip():
+    # 优雅的获得 ip 地址
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(('8.8.8.8', 80))
@@ -41,11 +41,32 @@ def upload_to_dir(file_name, file):
     return True
 
 
-# 今天是周五吗
 def today_is_friday():
+    # 今天是周五吗
     friday = datetime.now().weekday()
 
     if friday == 4:
         return True
     else:
         return False
+
+
+def remove_files(file_name):
+    # 删除文件
+    try:
+        os.remove("./static/share/{}".format(file_name))
+    except:
+        import shutil
+        shutil.rmtree("./static/share/{}".format(file_name))
+
+    return True
+
+
+def open_dir():
+    # 打开文件夹
+    if os.name == 'nt':
+        os.startfile(r'.\static\share')
+    else:
+        os.startfile(r'./static/share')
+
+    return
