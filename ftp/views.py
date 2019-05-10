@@ -4,7 +4,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 import sys
 
-from .ftp import show_dir_info, show_dir_files_name, upload_to_dir, get_host_ip, today_is_friday, remove_files, \
+from .ftp_tools import show_dir_info, show_dir_files_name, upload_to_dir, get_host_ip, today_is_friday, remove_files, \
     open_dir, morning_or_night
 
 
@@ -48,12 +48,12 @@ def index(request):
             file_name = request.FILES["file"].name
             file = request.FILES['file']
             # file_size = round(file.size / 1024 / 1024)  # 文件大小(单位 MB)
-        except Exception as e:
-            content = {"content": "上传失败!", "error": e}
+        except:
+            content = {"content": "上传失败!", "error": "没有选择文件."}
             return render(request, "error.html", content)
 
         if file_name in local_files:
-            content = {"content": "上传失败!", "error": "文件名已存在."}
+            content = {"content": "上传失败!", "error": "文件已存在."}
             return render(request, "error.html", content)
 
         try:

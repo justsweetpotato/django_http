@@ -65,7 +65,7 @@
 </head>
 <body>
 <div>
-    <h4>Django 文件传输工具 V2.9</h4>
+    <h3>Django 文件传输工具 V2.9</h3>
     <small>
         <i>
             {% if info %}
@@ -128,12 +128,14 @@
 </div>
 <hr>
 <div>
-    今天是周五吗?
-    {% if is_friday %}
-        <span>是!</span>
-    {% else %}
-        <span>不是!</span>
-    {% endif %}
+    <p>
+        今天是周五吗?
+        {% if is_friday %}
+            是!
+        {% else %}
+            不是!
+        {% endif %}
+    </p>
 </div>
 </body>
 </html>
