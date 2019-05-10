@@ -129,8 +129,8 @@ def morning_or_night():
     time_now = time.strftime("%H:%M", time.localtime())  # 获取现在的时间
     time_hour = str(datetime.now().time()).split(":")[0]  # 获取现在的小时
 
-    if os.path.exists('./time_dict.txt'):
-        with open("./time_dict.txt", 'r') as f:
+    if os.path.exists('./config/time_dict.txt'):
+        with open("./config/time_dict.txt", 'r') as f:
             time_dict = json.loads(f.read())
     else:
         time_dict = gen_time_dict()
@@ -162,7 +162,7 @@ def gen_time_dict():
         elif i in ["{:02d}".format(i) for i in range(1, 5)]:
             time_dict[i] = "凌晨"
 
-    with open("./time_dict.txt", 'w') as f:
+    with open("./config/time_dict.txt", 'w') as f:
         f.write(json.dumps(time_dict))
 
     return time_dict
