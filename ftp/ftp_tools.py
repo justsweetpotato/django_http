@@ -44,7 +44,7 @@ def show_dir_info():
     files_size_list = get_fileSize()
     t_list = get_FileAccessTime()
 
-    content = {"content": list(zip(files, t_list, files_size_list))}
+    content = {"content": zip(files, t_list, files_size_list)}
 
     return content
 
