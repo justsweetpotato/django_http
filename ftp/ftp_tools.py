@@ -10,12 +10,15 @@ from datetime import datetime
 
 def get_host_ip():
     # 优雅的获得 ip 地址
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # 不需要网络连接只要网卡处于工作状态就能取得 ip
         s.connect(('8.8.8.8', 80))
-        ip = s.getsockname()[0]
     except:
+        # 这个函数一般不会被执行, 假如执行了(没有网的状态)也取不到 ip
         ip = gen_host_ip()
+    else:
+        ip = s.getsockname()[0]
     finally:
         s.close()
 
@@ -23,6 +26,7 @@ def get_host_ip():
 
 
 def gen_host_ip():
+    # 获取 ip 的另一种方法
     # 如果 socket 方法无法获得 ip 则读取本地文件中的 ip
     try:
         if os.name == 'nt':
@@ -189,3 +193,4 @@ def open_dir():
 
 if __name__ == '__main__':
     print(morning_or_night())
+    print(get_host_ip())
