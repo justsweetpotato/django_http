@@ -117,11 +117,19 @@ def upload_to_dir(file_name, file):
 def today_is_friday():
     # 今天是周五吗
     friday = datetime.now().weekday()
+    sunday = datetime.now().weekday()
 
     if friday == 4:
-        return True
+        friday = True
     else:
-        return False
+        friday = False
+
+    if sunday == 6:
+        sunday = True
+    else:
+        sunday = False
+
+    return friday, sunday
 
 
 def morning_or_night():

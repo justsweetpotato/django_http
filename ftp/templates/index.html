@@ -129,12 +129,17 @@
 <hr>
 <div>
     <p>
-        今天是周五吗?
         {% if is_friday %}
-            是!
+            今天是周五吗?&nbsp;是!
         {% else %}
-            不是!
+            今天是周日吗?&nbsp;
+            {% if is_sunday %}
+                是!
+            {% else %}
+                不是...
+            {% endif %}
         {% endif %}
+
     </p>
 </div>
 </body>

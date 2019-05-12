@@ -17,8 +17,9 @@ def index(request):
         inner_ip_address = request.META['REMOTE_ADDR']
 
         content = show_dir_info()  # 遍历文件夹下的所有文件信息
-        is_friday = today_is_friday()  # 今天是周五吗?
+        is_friday, is_sunday = today_is_friday()  # 今天是周五吗?
         content["is_friday"] = is_friday
+        content["is_sunday"] = is_sunday
         time_name, time_now = morning_or_night()
         content["hello"] = "{}好".format(time_name)
         content["time"] = time_now
