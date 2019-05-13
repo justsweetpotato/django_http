@@ -3,9 +3,11 @@
 
 import os
 import socket
-import time
 import json
+import glob
+from time import localtime, strftime
 from datetime import datetime
+from .humansize import approximate_size
 
 
 def get_host_ip():
@@ -43,66 +45,24 @@ def gen_host_ip():
 
 def show_dir_info():
     # 返回当前目录下所有文件的 文件名, 访问时间, 文件大小
-    # files = [file[:30] if (len(file[:30]) < 30) else file[:30] + '...' for file in os.listdir('./static/share')]
-    files = os.listdir('./static/share')
-    files_size_list = get_fileSize()
-    t_list = get_FileAccessTime()
+    files = glob.glob("./static/share/*")  # 返回带相对路径的文件列表
 
-    content = {"content": zip(files, t_list, files_size_list)}
+    files_name = show_files_name()
+    files_size = []
+    files_atime = []
+
+    for file in files:
+        files_size.append(approximate_size(os.stat(file).st_size))
+        files_atime.append(strftime('%Y-%m-%d %H:%M:%S', localtime(os.stat(file).st_atime)))
+    content = {"content": zip(files_name, files_atime, files_size)}
 
     return content
 
 
-def show_dir_files_name():
+def show_files_name():
     files = os.listdir('./static/share')
 
     return files
-
-
-def get_FileAccessTime():
-    files = os.listdir('./static/share')
-    t_list = []
-
-    for file_name in files:
-        file_path = './static/share/{}'.format(file_name)
-        t = os.path.getatime(file_path)
-        t_list.append(t)
-
-    return TimeStampToTime(t_list)
-
-
-def TimeStampToTime(timestamp_list):
-    timeStruct_list = []
-
-    for timestamp in timestamp_list:
-        timeStruct = time.localtime(timestamp)
-        timeStruct = time.strftime('%Y-%m-%d %H:%M:%S', timeStruct)
-        timeStruct_list.append(timeStruct)
-
-    return timeStruct_list
-
-
-def get_fileSize():
-    files = os.listdir('./static/share')
-    files_size_list = []
-
-    for file_name in files:
-        file_path = './static/share/{}'.format(file_name)
-        file_size = os.path.getsize(file_path)
-        file_size = file_size / 1024
-
-        if file_size >= 1000:
-            file_size = file_size / 1024
-            if file_size >= 1000:
-                file_size = file_size / 1024
-                file_size = "{:>7.2f} {}".format(file_size, "GB")
-            else:
-                file_size = "{:>7.2f} {}".format(file_size, "MB")
-        else:
-            file_size = "{:>7.2f} {}".format(file_size, "KB")
-        files_size_list.append(file_size)
-
-    return files_size_list
 
 
 def upload_to_dir(file_name, file):
@@ -134,7 +94,7 @@ def today_is_friday():
 
 def morning_or_night():
     # 问好
-    time_now = time.strftime("%H:%M", time.localtime())  # 获取现在的时间
+    time_now = strftime("%H:%M", localtime())  # 获取现在的时间
     time_hour = str(datetime.now().time()).split(":")[0]  # 获取现在的小时
 
     if os.path.exists('./config/time_dict.txt'):
@@ -200,5 +160,4 @@ def open_dir():
 
 
 if __name__ == '__main__':
-    print(morning_or_night())
     print(get_host_ip())

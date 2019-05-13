@@ -4,7 +4,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 import sys
 
-from .ftp_tools import show_dir_info, show_dir_files_name, upload_to_dir, get_host_ip, today_is_friday, remove_files, \
+from .ftp_tools import show_dir_info, show_files_name, upload_to_dir, get_host_ip, today_is_friday, remove_files, \
     open_dir, morning_or_night
 
 
@@ -44,7 +44,7 @@ def index(request):
         return render(request, "index.html", content)
 
     else:
-        local_files = show_dir_files_name()
+        local_files = show_files_name()
         try:
             file_name = request.FILES["file"].name
             file = request.FILES['file']
