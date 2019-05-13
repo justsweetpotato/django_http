@@ -52,8 +52,8 @@ def show_dir_info():
     files_atime = []
 
     for file in files:
-        files_size.append(approximate_size(os.stat(file).st_size))
         files_atime.append(strftime('%Y-%m-%d %H:%M:%S', localtime(os.stat(file).st_atime)))
+        files_size.append(approximate_size(os.stat(file).st_size))
     content = {"content": zip(files_name, files_atime, files_size)}
 
     return content
