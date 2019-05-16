@@ -47,7 +47,7 @@ print("                   文件字节大小:", metadate.st_size)
 print("            经过格式化的文件大小:", approximate_size(metadate.st_size, False))
 
 all_sizes_info = [
-    (f, approximate_size(os.stat(f).st_size), time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.stat(f).st_atime)))
+    (os.path.split(f)[-1], approximate_size(os.stat(f).st_size), time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(os.stat(f).st_atime)))
     for f in glob.glob("*")]
 
 print("  文件名, 文件大小, 文件访问时间:", all_sizes_info)

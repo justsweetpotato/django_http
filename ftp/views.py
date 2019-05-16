@@ -49,8 +49,8 @@ def index(request):
             file_name = request.FILES["file"].name
             file = request.FILES['file']
             # file_size = round(file.size / 1024 / 1024)  # 文件大小(单位 MB)
-        except:
-            content = {"content": "上传失败!", "error": "没有选择文件."}
+        except Exception as e:
+            content = {"content": "上传失败!", "error": e}
             return render(request, "error.html", content)
 
         if file_name in local_files:

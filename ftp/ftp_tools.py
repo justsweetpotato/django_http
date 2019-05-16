@@ -48,8 +48,8 @@ def show_dir_info():
     files = glob.glob("./static/share/*")  # 返回带相对路径的文件列表
 
     files_name = show_files_name()
-    files_size = []
     files_atime = []
+    files_size = []
 
     for file in files:
         files_atime.append(strftime('%Y-%m-%d %H:%M:%S', localtime(os.stat(file).st_atime)))
