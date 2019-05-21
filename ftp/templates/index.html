@@ -106,7 +106,7 @@
                 <a id="a1" href="/static/share/{{ file_name }}" download="">{{ file_name }}</a>
                 <span id="span1">{{ file_size }}</span>
                 <span id="span2">{{ file_time }}</span>
-                <form id="form2" action="/del/{{ file_name }}" method="get">
+                <form id="form2" action="/delete/{{ file_name }}" method="get">
                     <input type="submit" value="删除">
                 </form>
             </li>
@@ -119,7 +119,7 @@
     <br>
     <br>
     <form action="" enctype="multipart/form-data" method="post">
-{#        {% csrf_token %}#}
+        {# {% csrf_token %}#}
         <input type="file" name="file" id="">
         <br>
         <br>
@@ -131,15 +131,9 @@
     <p>
         {% if is_friday %}
             今天是周五吗?&nbsp;是!
-        {% else %}
-            今天是周日吗?&nbsp;
-            {% if is_sunday %}
-                是!
-            {% else %}
-                不是...
-            {% endif %}
+        {% elif is_sunday %}
+            今天是周日吗?&nbsp;是! 准备工作!
         {% endif %}
-
     </p>
 </div>
 </body>

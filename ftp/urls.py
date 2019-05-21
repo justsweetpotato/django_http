@@ -6,6 +6,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path("del/<str:file_name>/", views.tools_rm_files),
+    path("delete/<str:file_name>/", views.tools_rm_files),
     path("open/", views.tools_open_dir),
 ]
