@@ -7,7 +7,11 @@ import json
 import glob
 from time import localtime, strftime
 from datetime import datetime
+from django.conf import settings
+
 from .humansize import approximate_size
+
+config_time_name = "time_name.conf"
 
 
 def get_host_ip():
@@ -45,7 +49,8 @@ def gen_host_ip():
 
 def show_dir_info():
     # 返回当前目录下所有文件的 文件名, 访问时间, 文件大小
-    files = glob.glob("./static/share/*")  # 返回带相对路径的文件列表
+    # files = glob.glob("./static/share/*")  # 返回带相对路径的文件列表
+    files = glob.glob("{0}/static/share/*".format(settings.BASE_DIR))  # 返回带相对路径的文件列表
 
     files_name = show_files_name()
     files_atime = []
@@ -60,14 +65,14 @@ def show_dir_info():
 
 
 def show_files_name():
-    files = os.listdir('./static/share')
+    files = os.listdir('{0}/static/share'.format(settings.BASE_DIR))
 
     return files
 
 
 def upload_to_dir(file_name, file):
     # 上传文件到文件夹
-    with open('./static/share/{0}'.format(file_name), 'wb') as f:
+    with open('{0}/static/share/{1}'.format(settings.BASE_DIR, file_name), 'wb') as f:
         for chunk in file.chunks():
             f.write(chunk)
 
@@ -97,8 +102,8 @@ def morning_or_night():
     time_now = strftime("%H:%M", localtime())  # 获取现在的时间
     time_hour = str(datetime.now().time()).split(":")[0]  # 获取现在的小时
 
-    if os.path.exists('./config/time_dict.txt'):
-        with open("./config/time_dict.txt", 'r') as f:
+    if os.path.exists("{0}/config/{1}".format(settings.BASE_DIR, config_time_name)):
+        with open("{0}/config/{1}".format(settings.BASE_DIR, config_time_name), 'r') as f:
             time_dict = json.loads(f.read())
     else:
         time_dict = gen_time_dict()
@@ -109,6 +114,7 @@ def morning_or_night():
 def gen_time_dict():
     print("文件不存在, 生成中...")
     time_dict = {"{:02d}".format(i): None for i in range(0, 24)}
+    print(time_dict)
 
     for i in time_dict:
         if i in ["{:02d}".format(i) for i in range(5, 8)]:
@@ -130,7 +136,7 @@ def gen_time_dict():
         elif i in ["{:02d}".format(i) for i in range(1, 5)]:
             time_dict[i] = "凌晨"
 
-    with open("./config/time_dict.txt", 'w') as f:
+    with open("{0}/config/{1}".format(settings.BASE_DIR, config_time_name), 'w') as f:
         f.write(json.dumps(time_dict))
 
     return time_dict
@@ -139,10 +145,10 @@ def gen_time_dict():
 def remove_files(file_name):
     # 删除文件
     try:
-        os.remove("./static/share/{}".format(file_name))
+        os.remove("{0}/static/share/{1}".format(settings.BASE_DIR, file_name))
     except:
         import shutil
-        shutil.rmtree("./static/share/{}".format(file_name))
+        shutil.rmtree("{0}/static/share/{1}".format(settings.BASE_DIR, file_name))
 
     return
 
@@ -150,10 +156,10 @@ def remove_files(file_name):
 def open_dir():
     # 打开文件夹
     if os.name == 'nt':
-        os.startfile(r'.\static\share')
+        os.startfile(r'{0}\static\share'.format(settings.BASE_DIR))
     else:
         import subprocess
-        subprocess.Popen(['xdg-open', r"./static/share"])
+        subprocess.Popen(['xdg-open', r"{0}/static/share".format(settings.BASE_DIR)])
         # os.startfile(r'./static/share')
 
     return
@@ -161,3 +167,4 @@ def open_dir():
 
 if __name__ == '__main__':
     print(get_host_ip())
+    print(show_dir_info())
