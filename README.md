@@ -2,7 +2,7 @@
 
 使用 Django 框架完成的简单、小巧的文件传输工具,  支持下载与上传文件到指定文件夹, 让您在局域网中、 主机和虚拟机之间方便的传输文件.
 <br>
-![界面](https://raw.githubusercontent.com/justsweetpotato/makedown-img-store/master/ftp/django_ftp.png)
+![界面](https://raw.githubusercontent.com/justsweetpotato/makedown-img-store/master/ftp/django_http.png)
 
 ### 一、安装依赖
 #### 1.1 Python 安装
