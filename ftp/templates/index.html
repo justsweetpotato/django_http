@@ -135,6 +135,33 @@
             今天是周日吗?&nbsp;是! 准备工作!
         {% endif %}
     </p>
+    <h4>留言板</h4>
+    <form action="/post" method="post">
+        <table>
+            <tr>
+                <th>名字</th>
+                <td>
+                    <input type="text" name="name" size="30" placeholder="请输入姓名" required>
+                </td>
+            </tr>
+            <tr>
+                <th>内容</th>
+                <td>
+                    <textarea name="comment" cols="40" rows="5" placeholder="请输入内容" required></textarea>
+                </td>
+            </tr>
+        </table>
+        <p>
+            <button type="submit">提交</button>
+        </p>
+    </form>
+    <div>
+        <h4>留言记录</h4>
+        {% for greeting in greeting_list %}
+            {{ greeting.name }} 的留言 ({{ greeting.create_at }}):
+            <p>{{ greeting.comment }}</p>
+        {% endfor %}
+    </div>
 </div>
 </body>
 </html>
