@@ -34,7 +34,7 @@ $ python manage.py runserver 0.0.0.0:8000
 ### 三、连接
 在本机运行之后, 在本机浏览器上访问 http://127.0.0.1:8000<br>
 页面会自动提示局域网下其他设备应该访问的地址.<br>
-共享的文件保存在 django_ftp/static/share 目录下.
+共享的文件保存在 django_http/static/share 目录下.
 
 ### 一些问题
 <del>程序使用 file.write() 写入文件, 所以上传超过 1G 的大文件可能会出现问题, 正在计划使用模型的方式改善这个功能.</del>
