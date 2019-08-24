@@ -3,57 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>http server {{ time }}</title>
-    <!--
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    -->
-    <style>
-        a:link {
-            text-decoration: none;
-            color: blue
-        }
-
-        #form1 {
-            margin: 0px;
-            display: inline;
-        }
-
-        #label1 {
-            width: 100%;
-            float: left;
-        }
-
-        #li1 {
-            list-style-type: none;
-        }
-
-        #a1 {
-            width: 60%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: block;
-            float: left;
-        }
-
-        #span1 {
-            width: 17%;
-            float: left;
-            display: block;
-        }
-
-        #span2 {
-            width: 18%;
-            float: left;
-            display: block;
-        }
-
-        #form2 {
-            width: 5%;
-            float: left;
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" media="screen and (min-device-width: 800px)"
+          href="/static/css/index_pc.css">
+    <link rel="stylesheet" media="screen and (max-device-width: 800px)"
+          href="/static/css/index_mobile.css">
     <script>
         function copyText() {
             var copyText = document.getElementById("myText");

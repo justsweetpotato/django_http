@@ -1,0 +1,45 @@
+a:link {
+    text-decoration: none;
+    color: blue
+}
+
+#form1 {
+    margin: 0px;
+    display: inline;
+}
+
+#label1 {
+    width: 100%;
+    float: left;
+}
+
+#li1 {
+    list-style-type: none;
+}
+
+#a1 {
+    width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    float: left;
+}
+
+#span1 {
+    width: 17%;
+    float: left;
+    display: block;
+}
+
+#span2 {
+    width: 18%;
+    float: left;
+    display: block;
+}
+
+#form2 {
+    width: 5%;
+    float: left;
+    display: block;
+}
