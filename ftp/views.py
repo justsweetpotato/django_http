@@ -70,9 +70,9 @@ def index(request):
 def tools_rm_files(request, file_name):
     inner_ip_address = request.META['REMOTE_ADDR']
 
-    if inner_ip_address != "127.0.0.1":  # 确认是否是在主机运行
-        content = {"content": "删除失败!", "error": "没有权限(你不是管理员)."}
-        return render(request, "error.html", content)
+    # if inner_ip_address != "127.0.0.1":  # 确认是否是在主机运行
+    #     content = {"content": "删除失败!", "error": "没有权限(你不是管理员)."}
+    #     return render(request, "error.html", content)
 
     try:
         remove_files(file_name)  # 删除文件或文件夹
@@ -86,9 +86,9 @@ def tools_rm_files(request, file_name):
 def tools_open_dir(request):
     inner_ip_address = request.META['REMOTE_ADDR']
 
-    if inner_ip_address != "127.0.0.1":
-        content = {"content": "打开文件夹失败!", "error": "没有权限(你不是管理员)."}
-        return render(request, "error.html", content)
+    # if inner_ip_address != "127.0.0.1":
+    #     content = {"content": "打开文件夹失败!", "error": "没有权限(你不是管理员)."}
+    #     return render(request, "error.html", content)
 
     try:
         open_dir()  # 打开文件夹
